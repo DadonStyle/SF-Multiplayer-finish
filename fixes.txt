@@ -1,0 +1,10 @@
+should be done:
+1. shared types (FE && BE)
+2. game logic not working properly (FE && BE)
+3. remove duplicate code / unused code (FE && BE)
+4. move to svg files, add svgr vite (FE)
+5. create constant for the number of the leadboard list (now its 10) (BE)
+6. create README file
+
+suggestions:
+1. when submiting a name, should be group name, the first one that typed in
