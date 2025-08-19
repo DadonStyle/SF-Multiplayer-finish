@@ -5,6 +5,8 @@ should be done:
 4. move to svg files, add svgr vite (FE)
 5. create constant for the number of the leadboard list (now its 10) (BE)
 6. create README file
+7. error boundry
+8. check that all the types are in the types folders (and relevant interfaces)
 
 suggestions:
 1. when submiting a name, should be group name, the first one that typed in

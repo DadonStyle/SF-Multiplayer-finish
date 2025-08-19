@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { GameService } from './game.service';
-import { GameState } from './game.types';
+import { GameState } from '../../../shared/types';
 
 @ApiTags('game')
 @Controller('game')

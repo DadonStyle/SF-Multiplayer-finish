@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { GameState, GameCell, TOTAL_CELLS } from './game.types';
+import { GameState } from '../../../shared/types';
+import { TOTAL_CELLS } from '../../../shared/constants';
 
 @Injectable()
 export class GameStore {

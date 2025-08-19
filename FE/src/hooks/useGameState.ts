@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { GameState, GameOverEvent, MoveRequest } from "../types/types";
+import { GameOverEvent, MoveRequest } from "../types/types";
 import { useSocket } from "./useSocket";
+import { GameState } from "../../../shared/types";
 
 const initialGameState: GameState = {
   cells: [],

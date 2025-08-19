@@ -1,8 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { GameState } from "../types/types";
 import { GameCell } from "./GameCell";
-
+import { GameState } from "../../../shared/types";
 interface GameBoardProps {
   gameState: GameState;
   onCellClick: (position: number) => void;

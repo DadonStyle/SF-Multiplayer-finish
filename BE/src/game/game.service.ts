@@ -1,19 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { GameStore } from './game.store';
 import { AsyncMutex } from './mutex.util';
-import {
-  GameState,
-  GameCell,
-  Shape,
-  Color,
-  MoveResult,
-  SHAPES,
-  COLORS,
-  GRID_ROWS,
-  GRID_COLS,
-  TOTAL_CELLS,
-  COOLDOWN_TURNS,
-} from './game.types';
+import { Color, GameCell, GameState, Shape } from '../../../shared/types';
+import { MoveResult } from './game.types';
+import { COLORS, COOLDOWN_TURNS, GRID_COLS, GRID_ROWS, SHAPES, TOTAL_CELLS } from '../../../shared/constants';
 
 @Injectable()
 export class GameService {
