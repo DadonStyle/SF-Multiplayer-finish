@@ -1,7 +1,7 @@
 should be done:
 1. shared types (FE && BE) - V
-2. game logic not working properly (FE && BE)
-3. remove duplicate code / unused code (FE && BE) (game controller removed)
+2. game logic not working properly (FE && BE) - V
+3. remove duplicate code / unused code (FE && BE) (game controller removed) - V
 4. move to svg files, add svgr vite (FE)
 5. create constant for the number of the leadboard list (now its 10) (BE)
 6. create README file
