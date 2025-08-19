@@ -24,3 +24,8 @@ export interface LeaderboardEntry {
   score: number;
   timestamp: string;
 }
+
+export interface GameOverEvent {
+  finalScore: number;
+  totalTurns: number;
+}

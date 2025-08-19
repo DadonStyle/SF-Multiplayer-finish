@@ -11,12 +11,3 @@ export interface ConnectionStatus {
   error: string | null;
 }
 
-export interface MoveRequest {
-  position: number;
-}
-
-export interface GameOverEvent {
-  finalScore: number;
-  totalTurns: number;
-}
-

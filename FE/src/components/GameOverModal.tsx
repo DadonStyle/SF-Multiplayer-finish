@@ -9,9 +9,9 @@ import {
   Alert,
   CircularProgress,
 } from "@mui/material";
-import { GameOverEvent } from "../types/types";
 import { gameApi } from "../api/leaderboardApi";
 import { toast } from "react-toastify";
+import { GameOverEvent } from "../../../shared/types";
 
 interface GameOverModalProps {
   open: boolean;

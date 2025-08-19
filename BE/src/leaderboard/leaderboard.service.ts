@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { LeaderboardEntry } from '../game/game.types';
+import { LeaderboardEntry } from '../../../shared/types';
 
 @Injectable()
 export class LeaderboardService {
@@ -17,7 +17,7 @@ export class LeaderboardService {
     const newEntry: LeaderboardEntry = {
       nickname: nickname.trim(),
       score,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     };
 
     this.leaderboard.push(newEntry);

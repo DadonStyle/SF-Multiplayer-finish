@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { GameOverEvent, MoveRequest } from "../types/types";
 import { useSocket } from "./useSocket";
-import { GameState } from "../../../shared/types";
+import { GameOverEvent, GameState } from "../../../shared/types";
+import { ClickMoveDto } from "../../../shared/DTOs";
 
 const initialGameState: GameState = {
   cells: [],
@@ -67,7 +67,7 @@ export const useGameState = () => {
     }
 
     setPendingMove(true);
-    const moveRequest: MoveRequest = { position };
+    const moveRequest: ClickMoveDto = { position };
     emit("click", moveRequest);
   };
 

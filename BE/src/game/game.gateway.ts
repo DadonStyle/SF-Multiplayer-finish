@@ -12,6 +12,7 @@ import { Logger, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { GameService } from './game.service';
 import { ClickMoveValidatorDTO } from './game.validators';
+import { GameOverEvent } from '../../../shared/types';
 
 @WebSocketGateway({
   namespace: '/game',
@@ -59,26 +60,17 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     try {
       const result = await this.gameService.applyClick(moveData.position);
-
       if (result.success && result.gameState) {
         this.server.to('game-room').emit('state', result.gameState);
-
-        if (result.gameState.isGameOver) {
-          this.server.to('game-room').emit('gameOver', {
-            finalScore: result.gameState.score,
-            totalTurns: result.gameState.currentTurn,
-          });
-        }
       } else {
         client.emit('moveError', { error: result.error });
-
-        if (result.gameState?.isGameOver) {
-          this.server.to('game-room').emit('state', result.gameState);
-          this.server.to('game-room').emit('gameOver', {
-            finalScore: result.gameState.score,
-            totalTurns: result.gameState.currentTurn,
-          });
-        }
+      }
+      if (result?.gameState?.isGameOver) {
+        const gameOverEventObj: GameOverEvent = {
+          finalScore: result.gameState.score,
+          totalTurns: result.gameState.currentTurn,
+        };
+        this.server.to('game-room').emit('gameOver', gameOverEventObj);
       }
     } catch (error) {
       this.logger.error(`Error processing click: ${error.message}`);
