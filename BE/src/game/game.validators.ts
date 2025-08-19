@@ -1,5 +1,5 @@
 import { IsInt, IsString, Min, Max, IsNotEmpty, MinLength, MaxLength } from 'class-validator';
-import { TOTAL_CELLS } from './game.types';
+import { TOTAL_CELLS } from '../../../shared/constants';
 
 export class ClickMoveDto {
   @IsInt()

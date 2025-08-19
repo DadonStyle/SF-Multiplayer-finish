@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LeaderboardEntry } from '../types/types';
+import { LeaderboardEntry } from '../../../shared/types';
 
 const API_BASE_URL = import.meta.env.MODE === 'production' 
   ? 'https://your-production-domain.com' 
@@ -24,11 +24,6 @@ apiClient.interceptors.response.use(
   }
 );
 
-export interface SubmitScoreRequest {
-  nickname: string;
-  score: number;
-}
-
 export const gameApi = {
   async fetchLeaderboard(): Promise<LeaderboardEntry[]> {
     try {
@@ -41,7 +36,7 @@ export const gameApi = {
 
   async submitScore(nickname: string, score: number): Promise<LeaderboardEntry[]> {
     try {
-      const request: SubmitScoreRequest = { nickname, score };
+      const request: Omit<LeaderboardEntry, 'timestamp'> = { nickname, score };
       const response = await apiClient.post<LeaderboardEntry[]>('/leaderboard', request);
       return response.data || [];
     } catch (error) {
