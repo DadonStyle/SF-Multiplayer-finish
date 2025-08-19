@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { LeaderboardEntry } from '../../../shared/types';
+import { SubmitScoreDto } from '../../../shared/DTOs';
 
 const API_BASE_URL = import.meta.env.MODE === 'production' 
   ? 'https://your-production-domain.com' 
@@ -36,7 +37,7 @@ export const gameApi = {
 
   async submitScore(nickname: string, score: number): Promise<LeaderboardEntry[]> {
     try {
-      const request: Omit<LeaderboardEntry, 'timestamp'> = { nickname, score };
+      const request: SubmitScoreDto = { nickname, score };
       const response = await apiClient.post<LeaderboardEntry[]>('/leaderboard', request);
       return response.data || [];
     } catch (error) {

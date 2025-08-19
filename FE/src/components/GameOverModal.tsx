@@ -10,7 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { GameOverEvent } from "../types/types";
-import { gameApi } from "../api/gameApi";
+import { gameApi } from "../api/leaderboardApi";
 import { toast } from "react-toastify";
 
 interface GameOverModalProps {

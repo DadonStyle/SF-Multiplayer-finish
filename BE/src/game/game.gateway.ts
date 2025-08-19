@@ -11,7 +11,7 @@ import { Server, Socket } from 'socket.io';
 import { Logger, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { GameService } from './game.service';
-import { ClickMoveDto } from './game.validators';
+import { ClickMoveValidatorDTO } from './game.validators';
 
 @WebSocketGateway({
   namespace: '/game',
@@ -50,7 +50,7 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @Throttle({ default: { limit: 10, ttl: 1000 } })
   @UsePipes(new ValidationPipe({ transform: true }))
   async handleClick(
-    @MessageBody() moveData: ClickMoveDto,
+    @MessageBody() moveData: ClickMoveValidatorDTO,
     @ConnectedSocket() client: Socket,
   ) {
     this.logger.log(

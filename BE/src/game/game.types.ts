@@ -10,9 +10,3 @@ export interface MoveResult {
   gameState?: GameState;
   error?: string;
 }
-
-export interface LeaderboardEntry {
-  nickname: string;
-  score: number;
-  timestamp: Date;
-}

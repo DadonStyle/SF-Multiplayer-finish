@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { LeaderboardService } from './leaderboard.service';
-import { SubmitScoreDto } from '../game/game.validators';
-import { LeaderboardEntry } from '../game/game.types';
+import { SubmitScoreValidatorDTO } from './leaderboard.validators';
+import { LeaderboardEntry } from '../../../shared/types';
 
 @ApiTags('leaderboard')
 @Controller('leaderboard')
@@ -29,11 +29,11 @@ export class LeaderboardController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Submit a new score' })
-  @ApiBody({ type: SubmitScoreDto })
+  @ApiBody({ type: SubmitScoreValidatorDTO })
   @ApiResponse({ status: 201, description: 'Score submitted successfully' })
   @ApiResponse({ status: 400, description: 'Invalid input data' })
   async submitScore(
-    @Body() submitScoreDto: SubmitScoreDto,
+    @Body() submitScoreDto: SubmitScoreValidatorDTO,
   ): Promise<LeaderboardEntry[]> {
     this.logger.log(
       `Score submission: ${submitScoreDto.nickname} - ${submitScoreDto.score}`,
