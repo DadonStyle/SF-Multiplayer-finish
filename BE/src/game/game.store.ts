@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 import { GameState } from '../../../shared/types';
 import { TOTAL_CELLS } from '../../../shared/constants';
 
@@ -30,6 +31,7 @@ export class GameStore {
       currentTurn: 0,
       version: 0,
       status: 'playing',
+      gameId: uuidv4(),
     };
   }
 }

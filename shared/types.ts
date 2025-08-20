@@ -17,12 +17,14 @@ export interface GameState {
   currentTurn: number;
   version: number;
   status: GameStatus;
+  gameId: string;
 }
 
 export interface LeaderboardEntry {
   nickname: string;
   score: number;
   timestamp: string;
+  gameId: string;
 }
 
 export interface GameOverEvent {

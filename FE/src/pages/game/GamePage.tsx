@@ -74,6 +74,7 @@ export const GamePage: React.FC = () => {
             score={gameState.score}
             gameOverData={gameOverData}
             onResetBoard={resetGame}
+            gameId={gameState.gameId}
           />
         )}
 

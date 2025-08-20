@@ -3,7 +3,14 @@ import { GameStore } from './game.store';
 import { AsyncMutex } from './mutex.util';
 import { Color, GameCell, GameState, Shape } from '../../../shared/types';
 import { MoveResult } from './game.types';
-import { COLORS, COOLDOWN_TURNS, GRID_COLS, GRID_ROWS, SHAPES, TOTAL_CELLS } from '../../../shared/constants';
+import {
+  COLORS,
+  COOLDOWN_TURNS,
+  GRID_COLS,
+  GRID_ROWS,
+  SHAPES,
+  TOTAL_CELLS,
+} from '../../../shared/constants';
 
 @Injectable()
 export class GameService {
@@ -68,6 +75,7 @@ export class GameService {
         currentTurn: currentState.currentTurn + 1,
         version: currentState.version + 1,
         status: 'playing',
+        gameId: currentState.gameId,
       };
 
       this.gameStore.updateGameState(newState);
@@ -85,7 +93,7 @@ export class GameService {
     this.gameStore.resetGame();
     this.initializeNewGame();
     const newState = this.gameStore.getGameState();
-    this.logger.log('Game reset');
+    this.logger.log(`Game reset with new gameId: ${newState.gameId}`);
     return newState;
   }
 
@@ -116,10 +124,11 @@ export class GameService {
       currentTurn: 0,
       version: 1,
       status: 'playing',
+      gameId: this.gameStore.getGameState().gameId,
     };
 
     this.gameStore.updateGameState(initialState);
-    this.logger.log('New game initialized');
+    this.logger.log(`New game initialized with gameId: ${initialState.gameId}`);
   }
 
   private generateValidMove(

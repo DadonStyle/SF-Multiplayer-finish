@@ -10,6 +10,7 @@ const initialGameState: GameState = {
   currentTurn: 0,
   version: 0,
   status: "playing",
+  gameId: "",
 };
 
 export const useGameState = () => {

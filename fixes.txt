@@ -2,11 +2,11 @@ should be done:
 1. shared types (FE && BE) - V
 2. game logic not working properly (FE && BE) - V
 3. remove duplicate code / unused code (FE && BE) (game controller removed) - V
-4. move to svg files, add svgr vite (FE)
-5. create constant for the number of the leadboard list (now its 10) (BE)
+4. move to svg files, add svgr vite (FE) - V
+5. create constant for the number of the leadboard list (now its 10) (BE) - V
 6. create README file - V
 7. error boundry - V
 8. check that all the types are in the types folders (and relevant interfaces) - V
 
 suggestions:
-1. when submiting a name, should be group name, the first one that typed in
+1. when submiting a name, should be group name, the first one that typed in - V

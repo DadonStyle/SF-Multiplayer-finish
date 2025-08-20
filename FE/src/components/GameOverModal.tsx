@@ -20,6 +20,7 @@ interface GameOverModalProps {
   onResetBoard: () => void;
   title?: string;
   subtitle?: string;
+  gameId: string;
 }
 
 export const GameOverModal: React.FC<GameOverModalProps> = ({
@@ -29,6 +30,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   onResetBoard,
   title = "Game Over!",
   subtitle = "No valid shape/color combination available",
+  gameId,
 }) => {
   const [nickname, setNickname] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -50,12 +52,19 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
     setError(null);
 
     try {
-      await gameApi.submitScore(nickname.trim(), score);
+      await gameApi.submitScore(nickname.trim(), score, gameId);
       setSubmitted(true);
       toast.success("Score submitted successfully!");
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Failed to submit score";
+
+      if (errorMessage === "Another player already submitted group name") {
+        toast.info(errorMessage);
+        handleNewRound();
+        return;
+      }
+
       setError(errorMessage);
     } finally {
       setSubmitting(false);
@@ -116,7 +125,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
         {!submitted ? (
           <Box sx={{ mb: 3, width: "100%" }}>
             <Typography variant="h6" sx={{ mb: 2 }}>
-              Submit Your Score
+              Submit Team Score
             </Typography>
 
             <TextField

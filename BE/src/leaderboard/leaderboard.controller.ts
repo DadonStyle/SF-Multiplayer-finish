@@ -42,6 +42,7 @@ export class LeaderboardController {
     return this.leaderboardService.submitScore(
       submitScoreDto.nickname,
       submitScoreDto.score,
+      submitScoreDto.gameId,
     );
   }
 }

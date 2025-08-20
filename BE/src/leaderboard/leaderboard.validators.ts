@@ -1,4 +1,11 @@
-import { IsInt, IsString, Min, IsNotEmpty, MinLength, MaxLength } from 'class-validator';
+import {
+  IsInt,
+  IsString,
+  Min,
+  IsNotEmpty,
+  MinLength,
+  MaxLength,
+} from 'class-validator';
 import { SubmitScoreDto } from '../../../shared/DTOs';
 
 export class SubmitScoreValidatorDTO implements SubmitScoreDto {
@@ -11,4 +18,8 @@ export class SubmitScoreValidatorDTO implements SubmitScoreDto {
   @IsInt()
   @Min(0)
   score: number;
+
+  @IsString()
+  @IsNotEmpty()
+  gameId: string;
 }

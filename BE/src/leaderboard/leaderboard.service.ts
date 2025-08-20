@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, BadRequestException } from '@nestjs/common';
 import { LeaderboardEntry } from '../../../shared/types';
 import { LEADERBOARD_SIZE } from '../../../shared/constants';
 
@@ -16,11 +16,25 @@ export class LeaderboardService {
   async submitScore(
     nickname: string,
     score: number,
+    gameId: string,
   ): Promise<LeaderboardEntry[]> {
+    const trimmedNickname = nickname.trim();
+
+    const existingEntry = this.leaderboard.find(
+      (entry) => entry.gameId === gameId,
+    );
+
+    if (existingEntry) {
+      throw new BadRequestException(
+        'Another player already submitted group name',
+      );
+    }
+
     const newEntry: LeaderboardEntry = {
-      nickname: nickname.trim(),
+      nickname: trimmedNickname,
       score,
       timestamp: new Date().toISOString(),
+      gameId,
     };
 
     this.leaderboard.push(newEntry);

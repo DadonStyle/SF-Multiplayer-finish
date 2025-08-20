@@ -5,4 +5,5 @@ export interface ClickMoveDto {
 export interface SubmitScoreDto {
   nickname: string;
   score: number;
+  gameId: string;
 }
