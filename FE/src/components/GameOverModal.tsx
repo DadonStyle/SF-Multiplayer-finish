@@ -8,6 +8,7 @@ import {
   TextField,
   Alert,
   CircularProgress,
+  IconButton,
 } from "@mui/material";
 import { gameApi } from "../api/leaderboardApi";
 import { toast } from "react-toastify";
@@ -36,6 +37,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isMinimized, setIsMinimized] = useState(false);
 
   const handleSubmitScore = async () => {
     if (!nickname.trim()) {
@@ -75,27 +77,60 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
     setNickname("");
     setSubmitted(false);
     setError(null);
+    setIsMinimized(false);
     onResetBoard();
   };
 
   return createPortal(
-    <Modal open={open} onClose={() => {}} aria-labelledby="game-over-title">
-      <Box
+    <>
+      <Modal 
+        open={open && !isMinimized} 
+        onClose={() => {}} 
+        aria-labelledby="game-over-title"
         sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 400,
-          bgcolor: "background.paper",
-          border: "2px solid",
-          borderColor: "error.main",
-          borderRadius: 3,
-          boxShadow: 24,
-          p: 4,
-          textAlign: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
         }}
       >
+        <Box
+          sx={{
+            width: 400,
+            bgcolor: "background.paper",
+            border: "2px solid",
+            borderColor: "error.main",
+            borderRadius: 3,
+            boxShadow: 24,
+            p: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Box sx={{ 
+            display: "flex", 
+            justifyContent: "flex-end", 
+            width: "100%", 
+            mb: 1 
+          }}>
+            <IconButton
+              onClick={() => setIsMinimized(true)}
+              size="small"
+              sx={{ 
+                color: "text.secondary",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "18px",
+                fontWeight: "bold",
+                width: 32,
+                height: 32,
+                borderRadius: "50%"
+              }}
+            >
+              −
+            </IconButton>
+          </Box>
         <Typography
           id="game-over-title"
           variant="h3"
@@ -119,7 +154,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
         )}
 
         <Typography variant="body1" sx={{ mb: 3, color: "text.secondary" }}>
-          {subtitle}
+          {gameOverData?.reason || subtitle}
         </Typography>
 
         {!submitted ? (
@@ -178,8 +213,40 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
             </Button>
           </Box>
         )}
-      </Box>
-    </Modal>,
+        </Box>
+      </Modal>
+      {open && isMinimized && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
+          }}
+        >
+          <IconButton
+            onClick={() => setIsMinimized(false)}
+            sx={{
+              bgcolor: "error.main",
+              color: "white",
+              boxShadow: 3,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "18px",
+              fontWeight: "bold",
+              width: 48,
+              height: 48,
+              borderRadius: "50%",
+              "&:hover": {
+                bgcolor: "error.dark",
+              },
+            }}
+          >
+            +
+          </IconButton>
+        </Box>
+      )}
+    </>,
     document.body
   );
 };

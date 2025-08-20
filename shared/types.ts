@@ -30,4 +30,5 @@ export interface LeaderboardEntry {
 export interface GameOverEvent {
   finalScore: number;
   totalTurns: number;
+  reason?: string;
 }

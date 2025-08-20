@@ -10,3 +10,5 @@ should be done:
 
 suggestions:
 1. when submiting a name, should be group name, the first one that typed in - V
+2. tell the user the exact reason (missing shapes or colors) - V
+3. add minimize state to the modal in case the user want to see the board state - V

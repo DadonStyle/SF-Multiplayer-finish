@@ -69,6 +69,7 @@ export class GameGateway implements OnGatewayConnection, OnGatewayDisconnect {
         const gameOverEventObj: GameOverEvent = {
           finalScore: result.gameState.score,
           totalTurns: result.gameState.currentTurn,
+          reason: result.error,
         };
         this.server.to('game-room').emit('gameOver', gameOverEventObj);
       }

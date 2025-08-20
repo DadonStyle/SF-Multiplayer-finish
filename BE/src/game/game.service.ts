@@ -44,8 +44,11 @@ export class GameService {
         return { success: false, error: 'Cell is in cooldown' };
       }
 
-      const validMove = this.generateValidMove(currentState.cells, position);
-      if (!validMove) {
+      const validMoveResult = this.generateValidMove(
+        currentState.cells,
+        position,
+      );
+      if (!validMoveResult.move) {
         const newState: GameState = {
           ...currentState,
           isGameOver: true,
@@ -56,9 +59,11 @@ export class GameService {
         return {
           success: false,
           gameState: newState,
-          error: 'No valid moves available - game over',
+          error: validMoveResult.reason,
         };
       }
+
+      const validMove = validMoveResult.move;
 
       const newCells = [...currentState.cells];
       newCells[position] = {
@@ -134,7 +139,7 @@ export class GameService {
   private generateValidMove(
     board: GameCell[],
     position: number,
-  ): GameCell | null {
+  ): { move: GameCell | null; reason?: string } {
     const currentCell = board[position];
     const { forbiddenShapes, forbiddenColors } = this.getForbiddenOptions(
       board,
@@ -147,8 +152,21 @@ export class GameService {
     const availableShapes = this.getAvailableOptions(SHAPES, forbiddenShapes);
     const availableColors = this.getAvailableOptions(COLORS, forbiddenColors);
 
-    if (availableShapes.length === 0 || availableColors.length === 0) {
-      return null;
+    if (availableShapes.length === 0 && availableColors.length === 0) {
+      return {
+        move: null,
+        reason: 'No valid shapes or colors available - game over',
+      };
+    } else if (availableShapes.length === 0) {
+      return {
+        move: null,
+        reason: 'No valid shapes available - game over',
+      };
+    } else if (availableColors.length === 0) {
+      return {
+        move: null,
+        reason: 'No valid colors available - game over',
+      };
     }
 
     const shape =
@@ -156,7 +174,7 @@ export class GameService {
     const color =
       availableColors[Math.floor(Math.random() * availableColors.length)];
 
-    return { position, shape, color, cooldown: 0 };
+    return { move: { position, shape, color, cooldown: 0 } };
   }
 
   private getAvailableOptions<T>(allOptions: T[], forbidden: Set<T>): T[] {
