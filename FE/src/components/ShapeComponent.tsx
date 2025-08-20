@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { Square } from "./Square";
-import { Diamond } from "./Diamond";
-import { Circle } from "./Circle";
-import { Triangle } from "./Triangle";
-import { COLOR_MAP } from "../../constants/constants";
+import SquareIcon from "../assets/icons/square.svg?react";
+import DiamondIcon from "../assets/icons/diamond.svg?react";
+import CircleIcon from "../assets/icons/circle.svg?react";
+import TriangleIcon from "../assets/icons/triangle.svg?react";
+import { COLOR_MAP } from "../constants/constants";
 
 export const ShapeComponent: React.FC<{
   shape: string;
@@ -20,13 +20,13 @@ export const ShapeComponent: React.FC<{
   const renderShape = () => {
     switch (shape) {
       case "triangle":
-        return <Triangle style={style} />;
+        return <TriangleIcon style={style} />;
       case "square":
-        return <Square style={style} />;
+        return <SquareIcon style={style} />;
       case "diamond":
-        return <Diamond style={style} />;
+        return <DiamondIcon style={style} />;
       case "circle":
-        return <Circle style={style} />;
+        return <CircleIcon style={style} />;
       default:
         return null;
     }

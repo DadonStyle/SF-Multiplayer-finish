@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { GameCellProps } from "../types/types";
-import { ShapeComponent } from "./shapes/ShapeComponent";
+import { ShapeComponent } from "./ShapeComponent";
 
 export const GameCell: React.FC<GameCellProps> = ({
   cell,
