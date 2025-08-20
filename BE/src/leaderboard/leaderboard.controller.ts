@@ -11,6 +11,7 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { LeaderboardService } from './leaderboard.service';
 import { SubmitScoreValidatorDTO } from './leaderboard.validators';
 import { LeaderboardEntry } from '../../../shared/types';
+import { LEADERBOARD_SIZE } from '../../../shared/constants';
 
 @ApiTags('leaderboard')
 @Controller('leaderboard')
@@ -20,7 +21,7 @@ export class LeaderboardController {
   constructor(private readonly leaderboardService: LeaderboardService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get top 10 scores' })
+  @ApiOperation({ summary: `Get top ${LEADERBOARD_SIZE} scores` })
   @ApiResponse({ status: 200, description: 'Top scores returned successfully' })
   async getLeaderboard(): Promise<LeaderboardEntry[]> {
     return this.leaderboardService.getTopScores();

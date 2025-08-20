@@ -6,3 +6,4 @@ export const GRID_ROWS = 3;
 export const GRID_COLS = 6;
 export const TOTAL_CELLS = GRID_ROWS * GRID_COLS;
 export const COOLDOWN_TURNS = 3;
+export const LEADERBOARD_SIZE = 10;

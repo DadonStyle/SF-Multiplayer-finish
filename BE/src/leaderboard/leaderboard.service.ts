@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { LeaderboardEntry } from '../../../shared/types';
+import { LEADERBOARD_SIZE } from '../../../shared/constants';
 
 @Injectable()
 export class LeaderboardService {
@@ -7,7 +8,9 @@ export class LeaderboardService {
   private leaderboard: LeaderboardEntry[] = [];
 
   async getTopScores(): Promise<LeaderboardEntry[]> {
-    return this.leaderboard.sort((a, b) => b.score - a.score).slice(0, 10);
+    return this.leaderboard
+      .sort((a, b) => b.score - a.score)
+      .slice(0, LEADERBOARD_SIZE);
   }
 
   async submitScore(
@@ -24,7 +27,7 @@ export class LeaderboardService {
 
     const topEntries = this.leaderboard
       .sort((a, b) => b.score - a.score)
-      .slice(0, 10);
+      .slice(0, LEADERBOARD_SIZE);
 
     this.leaderboard = topEntries;
 
