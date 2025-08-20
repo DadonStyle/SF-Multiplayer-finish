@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { GameModule } from './game/game.module';
 import { LeaderboardModule } from './leaderboard/leaderboard.module';
 
@@ -22,7 +20,7 @@ import { LeaderboardModule } from './leaderboard/leaderboard.module';
     GameModule,
     LeaderboardModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
