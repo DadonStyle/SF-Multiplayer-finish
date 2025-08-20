@@ -1,4 +1,4 @@
-import { GameState } from "../../../shared/types";
+import { GameState } from '../../../shared/types';
 
 export interface Position {
   row: number;

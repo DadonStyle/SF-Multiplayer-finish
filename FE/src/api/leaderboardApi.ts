@@ -27,22 +27,14 @@ apiClient.interceptors.response.use(
 
 export const gameApi = {
   async fetchLeaderboard(): Promise<LeaderboardEntry[]> {
-    try {
-      const response = await apiClient.get<LeaderboardEntry[]>('/leaderboard');
-      return response.data || [];
-    } catch (error) {
-      throw error;
-    }
+    const response = await apiClient.get<LeaderboardEntry[]>('/leaderboard');
+    return response.data || [];
   },
 
-  async submitScore(nickname: string, score: number): Promise<LeaderboardEntry[]> {
-    try {
-      const request: SubmitScoreDto = { nickname, score };
-      const response = await apiClient.post<LeaderboardEntry[]>('/leaderboard', request);
-      return response.data || [];
-    } catch (error) {
-      throw error;
-    }
+  async submitScore(nickname: string, score: number, gameId: string): Promise<LeaderboardEntry[]> {
+    const request: SubmitScoreDto = { nickname, score, gameId };
+    const response = await apiClient.post<LeaderboardEntry[]>('/leaderboard', request);
+    return response.data || [];
   },
 
 };
