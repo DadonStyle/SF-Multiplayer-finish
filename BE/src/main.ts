@@ -22,7 +22,10 @@ async function bootstrap() {
 
   app.enableCors({
     origin:
-      process.env.NODE_ENV === 'production' ? ['https://domain.com'] : true,
+      process.env.ALLOWED_ORIGINS?.split(',') ||
+      (process.env.NODE_ENV === 'production'
+        ? ['https://yourdomain.com']
+        : true),
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],

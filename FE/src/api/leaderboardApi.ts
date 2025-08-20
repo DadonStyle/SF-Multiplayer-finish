@@ -1,14 +1,16 @@
 import axios from 'axios';
 import { LeaderboardEntry } from '../../../shared/types';
 import { SubmitScoreDto } from '../../../shared/DTOs';
+import { API_TIMEOUT } from '../../../shared/constants';
 
-const API_BASE_URL = import.meta.env.MODE === 'production' 
-  ? 'https://your-production-domain.com' 
-  : 'http://localhost:3000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
+  (import.meta.env.MODE === 'production' 
+    ? 'https://api.yourdomain.com' 
+    : 'http://localhost:3000');
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 5000,
+  timeout: API_TIMEOUT,
   headers: {
     'Content-Type': 'application/json',
   },

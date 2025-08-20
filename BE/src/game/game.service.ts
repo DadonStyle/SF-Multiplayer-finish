@@ -223,7 +223,7 @@ export class GameService {
   private decrementCooldowns(cells: GameCell[]): void {
     for (const cell of cells) {
       if (cell.cooldown > 0) {
-        cell.cooldown = Math.max(0, cell.cooldown - 1) as any;
+        cell.cooldown = Math.max(0, cell.cooldown - 1);
       }
     }
   }

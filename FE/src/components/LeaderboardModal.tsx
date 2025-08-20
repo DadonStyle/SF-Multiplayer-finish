@@ -45,7 +45,6 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
           overflow: 'auto',
         }}
       >
-        {/* Header */}
         <Box
           sx={{
             display: 'flex',
@@ -78,7 +77,6 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
           </IconButton>
         </Box>
 
-        {/* Leaderboard Content */}
         <Box sx={{ mb: 3 }}>
           <LeaderboardList
             autoRefresh={true}
@@ -87,7 +85,6 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
           />
         </Box>
 
-        {/* Footer */}
         <Box
           sx={{
             display: 'flex',
@@ -107,7 +104,6 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
           </Button>
         </Box>
 
-        {/* Info Text */}
         <Typography
           variant="caption"
           color="text.secondary"

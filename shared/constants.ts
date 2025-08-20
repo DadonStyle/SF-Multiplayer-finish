@@ -7,3 +7,5 @@ export const GRID_COLS = 6;
 export const TOTAL_CELLS = GRID_ROWS * GRID_COLS;
 export const COOLDOWN_TURNS = 3;
 export const LEADERBOARD_SIZE = 10;
+export const API_TIMEOUT = 5000;
+export const LEADERBOARD_REFRESH_INTERVAL = 30000;

@@ -19,6 +19,7 @@ import {
 import { gameApi } from "../api/leaderboardApi";
 import { formatScore, formatTimestamp } from "../utils/utils";
 import { LeaderboardEntry } from "../../../shared/types";
+import { LEADERBOARD_REFRESH_INTERVAL } from "../../../shared/constants";
 
 interface LeaderboardListProps {
   autoRefresh?: boolean;
@@ -54,7 +55,7 @@ export const LeaderboardList: React.FC<LeaderboardListProps> = ({
     fetchLeaderboard();
 
     if (autoRefresh) {
-      const interval = setInterval(fetchLeaderboard, 30000); // Refresh every 30 seconds
+      const interval = setInterval(fetchLeaderboard, LEADERBOARD_REFRESH_INTERVAL);
       return () => clearInterval(interval);
     }
   }, [autoRefresh]);
@@ -79,7 +80,7 @@ export const LeaderboardList: React.FC<LeaderboardListProps> = ({
       case 2:
         return "silver";
       case 3:
-        return "#CD7F32"; // Bronze
+        return "#CD7F32";
       default:
         return "text.secondary";
     }
